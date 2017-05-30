@@ -10,9 +10,13 @@ import {version as yarnVersion} from './util/yarn-version.js';
 const invariant = require('invariant');
 const semver = require('semver');
 
-const VERSIONS = Object.assign({}, process.versions, {
+const VERSIONS = {
   yarn: yarnVersion,
-});
+};
+
+for (const name of Object.keys(process.versions)) {
+  VERSIONS[name] = process.versions[name];
+}
 
 function isValid(items: Array<string>, actual: string): boolean {
   let isNotWhitelist = true;
